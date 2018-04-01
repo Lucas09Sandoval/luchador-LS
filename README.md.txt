@@ -1,1 +1,0 @@
-Tarea 1 de ayudantia de programación (luchadores)
