@@ -4,31 +4,14 @@ import java.util.Scanner;
 public class luchador_LucasSandoval {	
 	static int c=1; //para almacenar en la matriz de luchadores
 	static int a; //para comparar luchadores
-public static String [][] stats = new String[7][16];    
+public String [][] stats = new String[7][16];    
         
     public static void main(String[] args) {
-    nombres();
-    Scanner leer = new Scanner(System.in);
-    int cerrar;    
-    do{int opc;
-    System.out.println("1.Crear un luchador(límite:15)");
-    System.out.println("2.Mostrar todos los luchadores");
-    opc = leer.nextInt();
-    switch(opc){
-     case 1: crearUnLuchador(rango(),hp(),atk(),def(),spd(), elegirNombre(nombres()),elegirFaccion(faccion()));
-     break;             
-     case 2: mostrarPeleadores(); 
-     break;
-      }
-    System.out.println("¿Quiere continuar?");
-    System.out.println("1.Si");
-    System.out.println("2.No");
-        cerrar = leer.nextInt();
-     }while(cerrar==1);
-    System.out.println("Adios");
-     }       	
+    	inventarioLuchadores inv = new inventarioLuchadores();
+    	inv.menu();
+    }    
     
-   public static void crearUnLuchador(int rango,int hp, int atk, int def, int spd, String nombre, String faccion){
+   public void agregarUnLuchador(int rango,int hp, int atk, int def, int spd, String nombre, String faccion){
 	   compararLuchador(rango, nombre, faccion);
     	/*si el metodo comparar retorna un 0, generara un luchador
     	  si retorna un 1, significa que habia otro peleador igual
@@ -46,14 +29,15 @@ public static String [][] stats = new String[7][16];
         /*Tener en cuenta que "Base" es distinto del "Total"
         (Porque el Total es por un determinado rango del luchador)
         */ 
-        hp=hp*rango;
-        atk=atk*rango;
-        def=def*rango;
-        spd=spd*rango;               
-        almacenarLuchador(hp,atk,def,spd,nombre,faccion,rango);}      
+        int hp2=hp*rango;
+        int atk2=atk*rango;
+        int def2=def*rango;
+        int spd2=spd*rango;               
+        almacenarLuchador(hp2,atk2,def2,spd2,nombre,faccion,rango);
+        }      
 	   }
     
-    public static void compararLuchador(int rango, String nombre, String faccion){    	
+    public void compararLuchador(int rango, String nombre, String faccion){    	
     	    //los luchadores deben tener distinto rango o facción si tienen igual nombre
     	    a=0;
     	    /*el if que va aqui abajo es para prevenir errores 
@@ -75,10 +59,9 @@ public static String [][] stats = new String[7][16];
     	    			a++;}
     	    		}
     	    	}    	    	
-    }
-    	      	       
+    }    	      	       
     
-    public static String[] nombres(){
+    public String[] nombres(){
     String [] peleadores  = new String[15];
     peleadores[0]="Kazuma";
     peleadores[1]="Wolfmanx";
@@ -99,14 +82,14 @@ public static String [][] stats = new String[7][16];
     return peleadores;
     }
     
-    public static String elegirNombre(String []peleadores){
+    public String elegirNombre(String []peleadores){
    //n  variable para obtener el normbre del luchador
     int n = (int)(Math.random()*15);
     String name = peleadores[n];
     return name;
     }
     
-    public static String[] faccion(){
+    public String[] faccion(){
     String [] faccion = new String[3];
     faccion[0]="Agua";
     faccion[1]="Fuego";
@@ -114,14 +97,14 @@ public static String [][] stats = new String[7][16];
     return faccion;
     }
     
-    public static String elegirFaccion(String[]faccion){
+    public String elegirFaccion(String[]faccion){
     //f variable para obtener facción
     int f = (int)(Math.random()*3);
     String tipo = faccion[f];
     return tipo;
     }
     
-    public static int rango(){
+    public int rango(){
     	/*generar un numero al azar entre 1 y 100,
     	que simulara la probabilidad del rango del luchador
     	entre:
@@ -145,47 +128,106 @@ public static String [][] stats = new String[7][16];
         }
         
     //todas las estadisticas con +1 para evitar el 0
-    public static int hp(){
+    public int hp(){
         int hp = (int)(Math.random()*300+200+1);
         return hp;
         }     
-    public static int atk(){    
+    public int atk(){    
     int atk = (int)(Math.random()*50+20+1);
     return atk;
         }
-    public static int def(){
+    public int def(){
         int def = (int)(Math.random()*20+5+1);
         return def;
         }     
-    public static int spd(){
+    public int spd(){
     int spd = (int)(Math.random()*90+10+1);
     return spd;
-        }        
-    
-    public static void almacenarLuchador(int hp, int atk, int def, int spd, String nombre, String faccion, int rango){
+        }   
+    public void almacenarLuchador(int hp2, int atk2, int def2, int spd2, String nombre, String faccion, int rango){
     stats[0][0] = "Nombre";
-    stats[1][0]= "Rango";
-    stats[2][0] = "HP"; //Total
+    stats[1][0]= "Rango";    
+    stats[2][0] = "Facción";
     stats[3][0] = "ATK";//Total
     stats[4][0] = "DEF";//Total
     stats[5][0] = "SPD";//Total
-    stats[6][0] = "Facción";
-    stats[0][c] = nombre;
-    stats[1][c] = String.valueOf(rango);
-    stats[2][c] = String.valueOf(hp);
-    stats[3][c] = String.valueOf(atk);
-    stats[4][c] = String.valueOf(def);
-    stats[5][c] = String.valueOf(spd);
-    stats[6][c] = faccion;
+    stats[6][0] = "HP"; //Total    
+    stats[0][c] = "("+c+")"+nombre;
+    stats[1][c] = String.valueOf(rango);    
+    stats[2][c] = faccion;
+    stats[3][c] = String.valueOf(atk2);
+    stats[4][c] = String.valueOf(def2);
+    stats[5][c] = String.valueOf(spd2);
+    stats[6][c] = String.valueOf(hp2);    
     c++; 
     }
     
-    public static void mostrarPeleadores(){
-        for(int i=0; i<7; i++){
+    public void mostrarPeleadores(){
+        for(int i=0; i<3; i++){
           for(int j=0; j<16;j++){
               System.out.print(stats[i][j]+"\t");               
           }
             System.out.println();
         }
+        System.out.println("El total de luchadores es: "+(c-1));
+    }
+    public void mostrarDatosDeUnLuchador(int peleador){          
+                System.out.println("Nombre: "+ stats[0][peleador]+"\t");
+                System.out.println("Rango: "+ stats[1][peleador]+"\t");
+                System.out.println("Faccion: "+ stats[2][peleador]+"\t");
+                System.out.println("HP Total: "+ stats[6][peleador]+"\t");
+                System.out.println("ATK Total: "+ stats[3][peleador]+"\t");
+                System.out.println("DEF Total: "+ stats[4][peleador]+"\t");
+                System.out.println("SPD Total: "+ stats[5][peleador]+"\t");
+                          System.out.println();                   	
+    }
+    
+    //Los metodos desde aqui son los de importancia para el "avance 2"
+    
+    public void filtrarFaccion(int fac){
+    	int a=0;
+    	int d=0;    
+    	String F = "";
+    	if(fac==1){F="Agua";}
+    	if(fac==2){F="Fuego";}
+    	if(fac==3){F="Tierra";}    	
+    		System.out.println("Los luchadores de la facción del "+F+" son:");     		
+    		for(int j=0;j<16;j++){
+    			/*no comprendo por que el "if" de aqui abajo hace null 
+        		los peleadores creados(ver desde el menu mostrar todos los luchadores), 
+        		mismo problema en metodo filtrarRango*/
+    			if(F.equals(stats[2][j])){
+    			    System.out.print("El peleador N°: "+a); 
+    			    d++;
+    				}a++;
+    				}    	   	
+    	System.out.println("Total: "+ d);
+    	System.out.println("");
+    }
+    public void filtrarRango(int rang){
+    	int a=0;
+    	int d=0;
+    	System.out.println("Los luchadores del rango "+rang+ " son:");    	
+    		for(int j=0;j<16;j++){
+    			if(String.valueOf(rang).equals(stats[1][j])){
+    			    System.out.print("El peleador N°: "+a); 
+    			    d++;
+    				}a++;  
+    			}    		  		
+    	System.out.println("Total: "+ d);   
+    	System.out.println("");
+    }
+    public void eliminarLuchador(){
+    	if(c==1){
+    		System.out.println("No hay luchadores que eliminar");
+    	}else{
+    	stats[0][(c-1)] = "null";
+        stats[1][(c-1)] = "null";    
+        stats[2][(c-1)] = "null";
+        stats[6][(c-1)] = "null";
+        stats[3][(c-1)] = "null";
+        stats[4][(c-1)] = "null";
+        stats[5][(c-1)] = "null";
+        c--; }
     }
 }
