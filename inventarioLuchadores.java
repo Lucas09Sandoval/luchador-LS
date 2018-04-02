@@ -1,90 +1,62 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class inventarioLuchadores {
 	
-	luchador_LucasSandoval luch = new luchador_LucasSandoval();
+//Metodos para "agregar", "mostrar todos" y "ver un luchador" en la clase Luchador_LucasSandoval
 	
-	public void menu(){
-    	luch.nombres();
-    	int opc=0;
-        do{
-        Scanner leer = new Scanner(System.in);
-        System.out.println("1. Agregar un luchador(límite:15)");
-        System.out.println("2. Mostrar todos los luchadores");
-        System.out.println("3. Mostrar datos de un luchador");
-        System.out.println("4. Filtrar luchador");
-        System.out.println("5. Eliminar luchador(Solo elimina el último creado)"); 
-        System.out.println("6. Crear objeto equipable");
-        System.out.println("7. Salir");
-        opc = leer.nextInt();
-        ObjetoEquipable obj= new ObjetoEquipable();
-           
-        switch(opc){
-         case 1: luch.agregarUnLuchador(luch.rango(),luch.hp(),luch.atk(),luch.def(),luch.spd(), luch.elegirNombre(luch.nombres()),luch.elegirFaccion(luch.faccion()));
-                 menu();
-                 break;             
-         case 2: luch.mostrarPeleadores(); 
-                 menu();
-                 break;
-         case 3: luch.mostrarDatosDeUnLuchador(ingresarLuchador());
-                 menu();
-                 break;
-         case 4: filtrarLuchador();
-        	     break;
-         case 5: luch.eliminarLuchador();
-                 menu();
-        	     break;
-         case 6: obj.generarObjetoEquipable();
-                 menu();
-        	     break;
-         case 7: System.out.println("Adios!");
-                 break;
-        }
-        }while(opc>7 || opc<1);    	
-    }
-	public static int ingresarLuchador(){
-		Scanner leer = new Scanner(System.in);
-		int peleador;
-		System.out.println("Ingrese el luchador que desea ver");
-		peleador = leer.nextInt();
-		return peleador;
-	}
-	public static void filtrarLuchador(){
-		inventarioLuchadores filtLuch= new inventarioLuchadores();
-		Scanner leer = new Scanner(System.in);
-		int filtro =0;		
-		do{ System.out.println("Desea filtrar por:");
-			System.out.println("1.Facción");
-			System.out.println("2.Rango");
-			filtro = leer.nextInt();
-			switch(filtro){
-			case 1:filtLuch.filtrarFacc();
-			filtLuch.menu();			
-			break;
-			case 2:filtLuch.filtrarRang();
-			filtLuch.menu();
-			break;
-				}
-		}while(filtro>2||filtro<1);		
-	}
-	
-	public void filtrarFacc(){
-		int fac;
-		do{
-		System.out.println("Ingrese facción que desea filtrar");	
-		System.out.println("1. Agua");
-		System.out.println("2. Fuego");
-		System.out.println("3. Tierra");
-		Scanner leer= new Scanner(System.in);
-		fac = leer.nextInt();
-		luch.filtrarFaccion(fac);
-		}while(fac>3||fac<1);
-	}
-    public void filtrarRang(){
-    	System.out.println("Los rangos de los luchadores estan entre 1 y 5");
-    	System.out.println("Ingrese rango que desea filtrar:");
-		Scanner leer= new Scanner(System.in);
-		int rang = leer.nextInt();
-		luch.filtrarRango(rang);
+	//Metodo que elimina un luchador
+	   public int eliminarUnluchador(int opc,ArrayList<luchador_LucasSandoval> listaLuchs, int luchT){
+	    listaLuchs.remove(opc);
+	    luchT--;
+	    return luchT;
+	    } 
+	//Metodo que filtra los luchadores
+	public void filtrar(ArrayList<luchador_LucasSandoval> listaLuchs){
 		
-	}
+		int opc;
+		Scanner leer = new Scanner(System.in);
+		do{//para asegurarse que sea una opción valida
+		System.out.println("¿Desea filtrar por:");
+		System.out.println("1. Rango");
+		System.out.println("2.Facción");
+		opc =leer.nextInt();	
+		}while(opc>2 || opc<1);
+		
+		int a=0; //variable para imprimir los peleadores filtrados
+		String F=" ";//para filtrar en Facción haciendo uso del metodo equals
+		
+		if(opc==1){int rang;
+			do{
+			System.out.println("Ingrese el rango que desea filtrar(desde 1 a 5)");
+			rang = leer.nextInt();
+			}while(rang>5 || rang<1);
+			
+			for(int i=0;i<listaLuchs.size();i++){
+				if(listaLuchs.get(i).getRango()==rang){
+					System.out.println("El peleador N°"+i);
+					a++;
+				}				
+			}			
+			System.out.println("Los luchadores del rango "+rang+" son en total:"+a);			
+		}else{int fac;	//para obtener la facción del menu que viene abajo		      
+		        do{
+				System.out.println("Ingrese la facción que desea filtrar");
+				System.out.println("1. Agua");
+				System.out.println("2. Fuego");
+				System.out.println("3. Tierra");
+				fac = leer.nextInt();}while(fac>3 || fac<1);
+		        
+		        if(fac==1){F= "Agua";}
+		        if(fac==2){F= "Fuego";}
+		        if(fac==3){F= "Tierra";}
+		        
+				for(int i=0;i<listaLuchs.size();i++){
+					if(F.equals(listaLuchs.get(i).getFaccion())){
+						System.out.println("El peleador N°"+i);
+						a++;
+					}				
+				}			
+				System.out.println("Total de luchadores de la facción "+F+" son en total:"+a);				
+		}
+    }
 }

@@ -1,2 +1,3 @@
 Avance 2 de ayudantia de programación (luchadores)
-El programa falla al filtrar (no filtra y vuelve datos de matriz null)
+El programa esta incompleto, pero funciona mejor
+(Originalmente tenia todo en una matriz de string, tuve que empezar casi desde 0 el codigo T.T )

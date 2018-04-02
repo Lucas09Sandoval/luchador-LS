@@ -1,233 +1,225 @@
-import java.util.Random;
+import java.lang.Math;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class luchador_LucasSandoval {	
-	static int c=1; //para almacenar en la matriz de luchadores
-	static int a; //para comparar luchadores
-public String [][] stats = new String[7][16];    
-        
-    public static void main(String[] args) {
-    	inventarioLuchadores inv = new inventarioLuchadores();
-    	inv.menu();
-    }    
-    
-   public void agregarUnLuchador(int rango,int hp, int atk, int def, int spd, String nombre, String faccion){
-	   compararLuchador(rango, nombre, faccion);
-    	/*si el metodo comparar retorna un 0, generara un luchador
-    	  si retorna un 1, significa que habia otro peleador igual
-    	  por lo cual no se creara el peleador*/
-    	
-        if(0==a){
-        System.out.println("Se creó el luchador: "+nombre);
-        System.out.println("De la facción: "+faccion);
-        System.out.println("Con un rango de "+rango+" estellas");
-        System.out.println("Sus estadisticas son:");
-        System.out.println("HP Base: "+hp+" (Total: "+ hp*rango+")");
-        System.out.println("ATK Base: "+atk+" (Total: "+ atk*rango+")");
-        System.out.println("DEF Base: "+def+" (Total: "+ def*rango+")");        
-        System.out.println("SPD Base: "+spd+" (Total: "+ spd*rango+")");
-        /*Tener en cuenta que "Base" es distinto del "Total"
-        (Porque el Total es por un determinado rango del luchador)
-        */ 
-        int hp2=hp*rango;
-        int atk2=atk*rango;
-        int def2=def*rango;
-        int spd2=spd*rango;               
-        almacenarLuchador(hp2,atk2,def2,spd2,nombre,faccion,rango);
-        }      
+	private String nombre;
+	private int rango;
+	private String faccion;
+	private int hp;
+	private int atk;
+	private int def;
+	private int spd;	
+		
+	/* listaLuch es el ArrayList donde se guardan los luchadores creados
+	 public para que se puede ver desde otras clases (para el momento de ver objetos
+	 o otras cosas	*/	
+	static ArrayList<luchador_LucasSandoval> listaLuchs= new ArrayList<luchador_LucasSandoval>();
+	//Constructor de la clase
+	public luchador_LucasSandoval(String nombre,int rango, String faccion, int hp, int atk, int def, int spd){
+    	//los datos base de cada luchador creado
+    	this.nombre=nombre;
+    	this.rango=rango;
+    	this.faccion=faccion;
+    	this.hp = hp;
+    	this.atk = atk;
+    	this.def = def;
+    	this.spd = spd;  	 	
+    }
+
+	    public static void main(String[] args){	  
+	    	
+	    	int luchT=0; //variable para poner limite al número de luchadores (15)
+	    	
+	    	Scanner leer = new Scanner(System.in);
+	    	int opc;
+	    	do{
+	    	System.out.println("1. Mostrar Luchadores");
+	    	System.out.println("2. Agregar Luchador (límite:15)");
+	    	System.out.println("3. Ver un luchador");
+	    	System.out.println("4. Eliminar un luchador");
+	    	System.out.println("5. Filtrar Luchadores");	
+	    	System.out.println("6. Crear Objeto equipable");	
+	    	System.out.println("7. Salir");	    	
+	    	opc = leer.nextInt();
+	    	switch(opc){
+	    		case 1: mostrarLuchadores();
+	    	            break;
+	    	            
+	    		case 2: if(luchT==15){
+	    			System.out.println("Se alcanzo el límite de luchadores");
+	    		}else{
+	    			luchador_LucasSandoval peleador= new luchador_LucasSandoval(elegirNombre(nombres()),rango(), elegirFaccion(faccion()),hp(),atk(),def(),spd());
+	    			    listaLuchs.add(peleador);
+	    			    luchT++;
+	    			    System.out.println("Se creo un luchador");}
+	    		        break;
+	    		        
+	    		case 3:  do{//"opc" y "leer" son reusados de arriba	    			
+	    				System.out.println("Escoja el luchador que desea ver (desde el 0 al 14)");
+	    				opc = leer.nextInt();
+	    				}while(opc>(listaLuchs.size()-1) || opc<0);	    		          
+	    		         verUnLuchador(opc);	    		
+	    			    break;
+	    			   
+	    		case 4: inventarioLuchadores inv = new inventarioLuchadores();
+	    			do{//"opc" y "leer" son reusados de arriba	    			
+	    				System.out.println("Escoja un luchador que desea eliminar (desde el 0 al 14)");
+	    				opc = leer.nextInt();
+	    				}while(opc>(listaLuchs.size()-1) || opc<0);	    		          
+	    		          inv.eliminarUnluchador(opc, listaLuchs, luchT);  
+	    			    break;
+	    			    
+	    		case 5: inventarioLuchadores inven = new inventarioLuchadores();
+	    		         inven.filtrar(listaLuchs);
+	    				//inv.Filtrar(listaLuchs);
+	    				break;
+	    				
+	    		case 6: ObjetoEquipable obj= new ObjetoEquipable();
+	    		        System.out.println("Se ha creado un objeto equipable");
+	    		        obj.mostrarMejoraBase();
+	    		        obj.mostrarEstrellas();
+	    		        obj.mostrarMejoraFinal();
+	    				break;
+	    			   
+	    		case 7: System.out.println("Adios");
+	    			   break;	    			   
+	    	 }
+	    	}while(opc!=7);
+	    }	    	
+	    //Metodo que mustre todos los luchadores
+	    	public static void mostrarLuchadores(){
+	    		for(int i=0; i<listaLuchs.size();i++){	    		
+	    		System.out.print("Luchador N°"+" "+i+"\t"+"Nombre "+listaLuchs.get(i).getNom());
+	    		System.out.print("\t"+"Rango "+"\t"+listaLuchs.get(i).getRango());
+	    		System.out.print("\t"+"Facción "+"\t"+listaLuchs.get(i).getFaccion());
+	    		System.out.println(""); 	
+	    		}  		
+	    	}	    	
+	    	//Metodo que muestra un solo luchador con todos sus datos	    	
+		  public static void verUnLuchador(int opc){
+		    	System.out.println("Luchador N°"+" "+opc);
+		    	System.out.println("Nombre "+listaLuchs.get(opc).getNom());
+	    		System.out.println("Rango "+"\t"+listaLuchs.get(opc).getRango());
+	    		System.out.println("Facción "+"\t"+listaLuchs.get(opc).getFaccion());
+	    		System.out.println("HP "+"\t"+listaLuchs.get(opc).getHp());
+	    		System.out.println("ATK "+"\t"+listaLuchs.get(opc).getAtk());
+	    		System.out.println("DEF "+"\t"+listaLuchs.get(opc).getDef());
+	    		System.out.println("SPD "+"\t"+listaLuchs.get(opc).getSpd());
+	    		System.out.println(""); 	    	
+		    }	    	    	
+	    	//Metodos para crear los datos de un luchador (Nombre, faccion, rango, estadisticas)
+	    private static String[] nombres(){
+	    String [] peleadores  = new String[15];
+	    peleadores[0]="Kazuma";
+	    peleadores[1]="Wolfmanx";
+	    peleadores[2]="Darkrai";
+	    peleadores[3]="Destroyer";
+	    peleadores[4]="Gintoki";
+	    peleadores[5]="Magikarp";
+	    peleadores[6]="Agumon";
+	    peleadores[7]="Naruto";
+	    peleadores[8]="Luffy";
+	    peleadores[9]="Goku";
+	    peleadores[10]="Ichigo";
+	    peleadores[11]="Hakuno";
+	    peleadores[12]="Shirou";
+	    peleadores[13]="Araragi";
+	    peleadores[14]="Saitama";
+	   
+	    return peleadores;
+	    }
+	    
+	    private static String elegirNombre(String []peleadores){
+	   //n  variable para obtener el normbre del luchador
+	    int n = (int)(Math.random()*15);
+	    String name = peleadores[n];
+	    return name;
+	    }
+	    
+	    private static String[] faccion(){
+	    String [] faccion = new String[3];
+	    faccion[0]="Agua";
+	    faccion[1]="Fuego";
+	    faccion[2]="Tierra";
+	    return faccion;
+	    }
+	    
+	    private static String elegirFaccion(String[]faccion){
+	    //f variable para obtener facción
+	    int f = (int)(Math.random()*3);
+	    String tipo = faccion[f];
+	    return tipo;
+	    }
+	    
+	    private static int rango(){
+	    	int prob = (int)(Math.random()*100+1);
+	    	int rango=5;
+	    	/*El rango cambiara solo si se cumple la condición.
+	    	 Para que el rango se mantenga es 5 (es decir el máximo)
+	    	 el entero prob debe 5 o menos (% de que sea esa rango)*/
+	    	if(prob>5){rango=4;}
+	    	if(prob>15){rango=3;}
+	    	if(prob>30){rango=2;}
+	    	if(prob>60){rango=1;}
+	        return rango;
+	        }	
+	    
+	    private static int hp(){
+	        int hp = (int)(Math.random()*301+200);
+	        return hp;
+	        }     
+	    private static int atk(){    
+	    int atk = (int)(Math.random()*51+20);
+	    return atk;
+	        }
+	    private static int def(){
+	        int def = (int)(Math.random()*21+5);
+	        return def;
+	        }     
+	    private static int spd(){
+	    int spd = (int)(Math.random()*91+10);
+	    return spd;
+	    }	    
+	    //Metodos get y set
+	    
+	    public String getFaccion() {
+	   	 return this.faccion;	   	 
+	    }
+	    public int getRango() {
+	   	 return this.rango;
+	    }
+	    public String getNom() {
+	    return this.nombre;
+	    }
+	    public int getAtk() {
+	   	 return this.atk;
+	   			 }
+	   public int getHp() {
+	   	return this.hp;
+	   } 
+	   public int getDef() {
+	   	return this.def;
 	   }
-    
-    public void compararLuchador(int rango, String nombre, String faccion){    	
-    	    //los luchadores deben tener distinto rango o facción si tienen igual nombre
-    	    a=0;
-    	    /*el if que va aqui abajo es para prevenir errores 
-    	    por el limite de la matriz (15 luchadores), pues el metodo compararLuchador 
-    	    usa parte de la columna siguiente (trataria de usar una columna inexistente)*/
-    	    if(c==16){System.out.println("No se pueden crear más luchadores");
-    	    a++;
-    	    }else{
-    	    stats[0][c] = nombre;
-    	    stats[1][c] = String.valueOf(rango);
-    	    stats[6][c] = faccion; 
-    	    //no empiezo "y" desde 0 porque ahi estan solo el tipo de dato (nombre, hp, etc)
-    	    	for(int y=1; y<c; y++){
-    	    		if(stats[0][c]==stats[0][y] && stats[1][c]==stats[1][y]){  
-    	    			System.out.println("Luchador generado ya existe");
-    	    			a++;}
-    	    		
-    	    		if(stats[0][c]==stats[0][y] && stats[6][c]==stats[6][y]){    	    			
-    	    			a++;}
-    	    		}
-    	    	}    	    	
-    }    	      	       
-    
-    public String[] nombres(){
-    String [] peleadores  = new String[15];
-    peleadores[0]="Kazuma";
-    peleadores[1]="Wolfmanx";
-    peleadores[2]="Darkrai";
-    peleadores[3]="Destroyer";
-    peleadores[4]="Gintoki";
-    peleadores[5]="Magikarp";
-    peleadores[6]="Agumon";
-    peleadores[7]="Naruto";
-    peleadores[8]="Luffy";
-    peleadores[9]="Goku";
-    peleadores[10]="Ichigo";
-    peleadores[11]="Hakuno";
-    peleadores[12]="Shirou";
-    peleadores[13]="Araragi";
-    peleadores[14]="Saitama";
-   
-    return peleadores;
-    }
-    
-    public String elegirNombre(String []peleadores){
-   //n  variable para obtener el normbre del luchador
-    int n = (int)(Math.random()*15);
-    String name = peleadores[n];
-    return name;
-    }
-    
-    public String[] faccion(){
-    String [] faccion = new String[3];
-    faccion[0]="Agua";
-    faccion[1]="Fuego";
-    faccion[2]="Tierra";
-    return faccion;
-    }
-    
-    public String elegirFaccion(String[]faccion){
-    //f variable para obtener facción
-    int f = (int)(Math.random()*3);
-    String tipo = faccion[f];
-    return tipo;
-    }
-    
-    public int rango(){
-    	/*generar un numero al azar entre 1 y 100,
-    	que simulara la probabilidad del rango del luchador
-    	entre:
-    	 1 a 5 sera de 5 estrellas
-    	 6 a 15 de 4 estrellas
-    	 16 a 30 de 3 estrellas
-    	 31 a 60 de 2 estrellas
-    	 61 a 100 de 1 estrellas
-    	*/
-    	int rango =0;
-        int prob = (int)(Math.random()*100+1);
-        if(prob>60){rango =1;}
-        else{if(prob>30){rango=2;}
-        else{if(prob>15){rango =3;}
-        else{if(prob>5){rango =4;}
-        else{rango=5;}
-        }
-        }
-        }
-        return rango;
-        }
-        
-    //todas las estadisticas con +1 para evitar el 0
-    public int hp(){
-        int hp = (int)(Math.random()*300+200+1);
-        return hp;
-        }     
-    public int atk(){    
-    int atk = (int)(Math.random()*50+20+1);
-    return atk;
-        }
-    public int def(){
-        int def = (int)(Math.random()*20+5+1);
-        return def;
-        }     
-    public int spd(){
-    int spd = (int)(Math.random()*90+10+1);
-    return spd;
-        }   
-    public void almacenarLuchador(int hp2, int atk2, int def2, int spd2, String nombre, String faccion, int rango){
-    stats[0][0] = "Nombre";
-    stats[1][0]= "Rango";    
-    stats[2][0] = "Facción";
-    stats[3][0] = "ATK";//Total
-    stats[4][0] = "DEF";//Total
-    stats[5][0] = "SPD";//Total
-    stats[6][0] = "HP"; //Total    
-    stats[0][c] = "("+c+")"+nombre;
-    stats[1][c] = String.valueOf(rango);    
-    stats[2][c] = faccion;
-    stats[3][c] = String.valueOf(atk2);
-    stats[4][c] = String.valueOf(def2);
-    stats[5][c] = String.valueOf(spd2);
-    stats[6][c] = String.valueOf(hp2);    
-    c++; 
-    }
-    
-    public void mostrarPeleadores(){
-        for(int i=0; i<3; i++){
-          for(int j=0; j<16;j++){
-              System.out.print(stats[i][j]+"\t");               
-          }
-            System.out.println();
-        }
-        System.out.println("El total de luchadores es: "+(c-1));
-    }
-    public void mostrarDatosDeUnLuchador(int peleador){          
-                System.out.println("Nombre: "+ stats[0][peleador]+"\t");
-                System.out.println("Rango: "+ stats[1][peleador]+"\t");
-                System.out.println("Faccion: "+ stats[2][peleador]+"\t");
-                System.out.println("HP Total: "+ stats[6][peleador]+"\t");
-                System.out.println("ATK Total: "+ stats[3][peleador]+"\t");
-                System.out.println("DEF Total: "+ stats[4][peleador]+"\t");
-                System.out.println("SPD Total: "+ stats[5][peleador]+"\t");
-                          System.out.println();                   	
-    }
-    
-    //Los metodos desde aqui son los de importancia para el "avance 2"
-    
-    public void filtrarFaccion(int fac){
-    	int a=0;
-    	int d=0;    
-    	String F = "";
-    	if(fac==1){F="Agua";}
-    	if(fac==2){F="Fuego";}
-    	if(fac==3){F="Tierra";}    	
-    		System.out.println("Los luchadores de la facción del "+F+" son:");     		
-    		for(int j=0;j<16;j++){
-    			/*no comprendo por que el "if" de aqui abajo hace null 
-        		los peleadores creados(ver desde el menu mostrar todos los luchadores), 
-        		mismo problema en metodo filtrarRango*/
-    			if(F.equals(stats[2][j])){
-    			    System.out.print("El peleador N°: "+a); 
-    			    d++;
-    				}a++;
-    				}    	   	
-    	System.out.println("Total: "+ d);
-    	System.out.println("");
-    }
-    public void filtrarRango(int rang){
-    	int a=0;
-    	int d=0;
-    	System.out.println("Los luchadores del rango "+rang+ " son:");    	
-    		for(int j=0;j<16;j++){
-    			if(String.valueOf(rang).equals(stats[1][j])){
-    			    System.out.print("El peleador N°: "+a); 
-    			    d++;
-    				}a++;  
-    			}    		  		
-    	System.out.println("Total: "+ d);   
-    	System.out.println("");
-    }
-    public void eliminarLuchador(){
-    	if(c==1){
-    		System.out.println("No hay luchadores que eliminar");
-    	}else{
-    	stats[0][(c-1)] = "null";
-        stats[1][(c-1)] = "null";    
-        stats[2][(c-1)] = "null";
-        stats[6][(c-1)] = "null";
-        stats[3][(c-1)] = "null";
-        stats[4][(c-1)] = "null";
-        stats[5][(c-1)] = "null";
-        c--; }
-    }
+	   public int getSpd() {
+	   	return this.spd;
+	   }
+	   public void setFaccion(String faccion) {
+	   	this.faccion=faccion;
+	   }	   
+	   public void setNom(String nombre ) {
+	   		this.nombre=nombre;
+	   }
+	   public void setAtk(int atk) {
+	   	this.atk=atk;
+	   }
+	   public void setHp(int hp) {
+	   	this.hp=hp;
+	   }
+	   public void setDef(int def){
+	     this.def=def;
+	   }
+	   public void setSpd(int spd) {
+	   	this.spd=spd;
+	   }
 }
