@@ -11,104 +11,46 @@ public class luchador_LucasSandoval {
 	private int def;
 	private int spd;	
 		
-	/* listaLuch es el ArrayList donde se guardan los luchadores creados
-	 public para que se puede ver desde otras clases (para el momento de ver objetos
-	 o otras cosas	*/	
+	/*Se coloco el metodo main(menu) al final, en caso de que se quiera probar el funcionamiento	
+	  |||
+	  |||
+	  |||
+	  vvv 
+	   v 
+	 */
+	
+	/* listaLuchs es el ArrayList donde se guardan los luchadores creados
+	  no es privado, porque al mover(agregar) un luchador
+	  al arraylist inventario(de la clase inventarioLuchadores)
+	  este es eliminado de listaLuchs
+   */	
 	static ArrayList<luchador_LucasSandoval> listaLuchs= new ArrayList<luchador_LucasSandoval>();
 	//Constructor de la clase
-	public luchador_LucasSandoval(String nombre,int rango, String faccion, int hp, int atk, int def, int spd){
+	public luchador_LucasSandoval(){
     	//los datos base de cada luchador creado
-    	this.nombre=nombre;
-    	this.rango=rango;
-    	this.faccion=faccion;
-    	this.hp = hp;
-    	this.atk = atk;
-    	this.def = def;
-    	this.spd = spd;  	 	
-    }
-
-	    public static void main(String[] args){	  
-	    	
-	    	int luchT=0; //variable para poner limite al número de luchadores (15)
-	    	
-	    	Scanner leer = new Scanner(System.in);
-	    	int opc;
-	    	do{
-	    	System.out.println("1. Mostrar Luchadores");
-	    	System.out.println("2. Agregar Luchador (límite:15)");
-	    	System.out.println("3. Ver un luchador");
-	    	System.out.println("4. Eliminar un luchador");
-	    	System.out.println("5. Filtrar Luchadores");	
-	    	System.out.println("6. Crear Objeto equipable");	
-	    	System.out.println("7. Salir");	    	
-	    	opc = leer.nextInt();
-	    	switch(opc){
-	    		case 1: mostrarLuchadores();
-	    	            break;
-	    	            
-	    		case 2: if(luchT==15){
-	    			System.out.println("Se alcanzo el límite de luchadores");
-	    		}else{
-	    			luchador_LucasSandoval peleador= new luchador_LucasSandoval(elegirNombre(nombres()),rango(), elegirFaccion(faccion()),hp(),atk(),def(),spd());
-	    			    listaLuchs.add(peleador);
-	    			    luchT++;
-	    			    System.out.println("Se creo un luchador");}
-	    		        break;
-	    		        
-	    		case 3:  do{//"opc" y "leer" son reusados de arriba	    			
-	    				System.out.println("Escoja el luchador que desea ver (desde el 0 al 14)");
-	    				opc = leer.nextInt();
-	    				}while(opc>(listaLuchs.size()-1) || opc<0);	    		          
-	    		         verUnLuchador(opc);	    		
-	    			    break;
-	    			   
-	    		case 4: inventarioLuchadores inv = new inventarioLuchadores();
-	    			do{//"opc" y "leer" son reusados de arriba	    			
-	    				System.out.println("Escoja un luchador que desea eliminar (desde el 0 al 14)");
-	    				opc = leer.nextInt();
-	    				}while(opc>(listaLuchs.size()-1) || opc<0);	    		          
-	    		          inv.eliminarUnluchador(opc, listaLuchs, luchT);  
-	    			    break;
-	    			    
-	    		case 5: inventarioLuchadores inven = new inventarioLuchadores();
-	    		         inven.filtrar(listaLuchs);
-	    				//inv.Filtrar(listaLuchs);
-	    				break;
-	    				
-	    		case 6: ObjetoEquipable obj= new ObjetoEquipable();
-	    		        System.out.println("Se ha creado un objeto equipable");
-	    		        obj.mostrarMejoraBase();
-	    		        obj.mostrarEstrellas();
-	    		        obj.mostrarMejoraFinal();
-	    				break;
-	    			   
-	    		case 7: System.out.println("Adios");
-	    			   break;	    			   
-	    	 }
-	    	}while(opc!=7);
-	    }	    	
-	    //Metodo que mustre todos los luchadores
+    	this.nombre= elegirNombre(nombres());
+    	this.rango= rango();
+    	this.faccion= elegirFaccion(faccion());
+    	this.hp = hp();
+    	this.atk = atk();
+    	this.def = def();
+    	this.spd = spd();  	 	
+    }    
+	    //Metodo que muestre todos los luchadores de listaLuchs
 	    	public static void mostrarLuchadores(){
+	    		System.out.println("Luchadores de listaLuchs son:");
 	    		for(int i=0; i<listaLuchs.size();i++){	    		
 	    		System.out.print("Luchador N°"+" "+i+"\t"+"Nombre "+listaLuchs.get(i).getNom());
 	    		System.out.print("\t"+"Rango "+"\t"+listaLuchs.get(i).getRango());
 	    		System.out.print("\t"+"Facción "+"\t"+listaLuchs.get(i).getFaccion());
+	    		System.out.print("\t"+"HP:"+listaLuchs.get(i).getHp());
+	    		System.out.print("\t"+"ATK:"+listaLuchs.get(i).getAtk());
+	    		System.out.print("\t"+"DEF:"+" "+listaLuchs.get(i).getDef());
+	    		System.out.print("\t"+"SPD:"+listaLuchs.get(i).getSpd());
 	    		System.out.println(""); 	
-	    		}  		
-	    	}	    	
-	    	//Metodo que muestra un solo luchador con todos sus datos	    	
-		  public static void verUnLuchador(int opc){
-		    	System.out.println("Luchador N°"+" "+opc);
-		    	System.out.println("Nombre "+listaLuchs.get(opc).getNom());
-	    		System.out.println("Rango "+"\t"+listaLuchs.get(opc).getRango());
-	    		System.out.println("Facción "+"\t"+listaLuchs.get(opc).getFaccion());
-	    		System.out.println("HP "+"\t"+listaLuchs.get(opc).getHp());
-	    		System.out.println("ATK "+"\t"+listaLuchs.get(opc).getAtk());
-	    		System.out.println("DEF "+"\t"+listaLuchs.get(opc).getDef());
-	    		System.out.println("SPD "+"\t"+listaLuchs.get(opc).getSpd());
-	    		System.out.println(""); 	    	
-		    }	    	    	
-	    	//Metodos para crear los datos de un luchador (Nombre, faccion, rango, estadisticas)
+	    		}  
+	    	}    	  	
+//Metodos para crear los datos de un luchador (Nombre, faccion, rango, estadisticas)
 	    private static String[] nombres(){
 	    String [] peleadores  = new String[15];
 	    peleadores[0]="Kazuma";
@@ -125,33 +67,28 @@ public class luchador_LucasSandoval {
 	    peleadores[11]="Hakuno";
 	    peleadores[12]="Shirou";
 	    peleadores[13]="Araragi";
-	    peleadores[14]="Saitama";
-	   
+	    peleadores[14]="Saitama";	   
 	    return peleadores;
-	    }
-	    
+	    }	    
 	    private static String elegirNombre(String []peleadores){
 	   //n  variable para obtener el normbre del luchador
 	    int n = (int)(Math.random()*15);
 	    String name = peleadores[n];
 	    return name;
-	    }
-	    
+	    }	   
 	    private static String[] faccion(){
 	    String [] faccion = new String[3];
 	    faccion[0]="Agua";
 	    faccion[1]="Fuego";
 	    faccion[2]="Tierra";
 	    return faccion;
-	    }
-	    
+	    }	    
 	    private static String elegirFaccion(String[]faccion){
 	    //f variable para obtener facción
 	    int f = (int)(Math.random()*3);
 	    String tipo = faccion[f];
 	    return tipo;
-	    }
-	    
+	    }	    
 	    private static int rango(){
 	    	int prob = (int)(Math.random()*100+1);
 	    	int rango=5;
@@ -163,8 +100,7 @@ public class luchador_LucasSandoval {
 	    	if(prob>30){rango=2;}
 	    	if(prob>60){rango=1;}
 	        return rango;
-	        }	
-	    
+	        }		    
 	    private static int hp(){
 	        int hp = (int)(Math.random()*301+200);
 	        return hp;
@@ -181,8 +117,7 @@ public class luchador_LucasSandoval {
 	    int spd = (int)(Math.random()*91+10);
 	    return spd;
 	    }	    
-	    //Metodos get y set
-	    
+	    //Metodos get y set	    
 	    public String getFaccion() {
 	   	 return this.faccion;	   	 
 	    }
@@ -222,4 +157,85 @@ public class luchador_LucasSandoval {
 	   public void setSpd(int spd) {
 	   	this.spd=spd;
 	   }
+
+	    public static void main(String[] args){	    	
+	    	Scanner leer = new Scanner(System.in);
+	    	int opc;
+	    	do{
+	    	System.out.println("1. Mostrar Luchadores(de la lista *listaLuchs*)");
+	    	System.out.println("2. Crear Luchador (límite:15)");
+	    	System.out.println("3. Mostrar luchadores del *inventario*");
+	    	System.out.println("4. Ver un luchador(de la lista *inventario*)");
+	    	System.out.println("5. Eliminar un luchador del *inventario*");
+	    	System.out.println("6. Filtrar Luchadores del *inventario*");	
+	    	System.out.println("7. Agregar luchador al *inventario*");
+	    	System.out.println("8. Crear objeto equipable");
+	    	System.out.println("9. Crear Monstruo");
+	    	System.out.println("10. Salir");	    	
+	    	opc = leer.nextInt();
+	    	switch(opc){
+	    		case 1: mostrarLuchadores();
+	    	            break;
+	    	            
+	    		case 2: if((listaLuchs.size())==15){
+	    			System.out.println("Se alcanzo el límite de luchadores");
+	    		}else{
+	    			luchador_LucasSandoval peleador= new luchador_LucasSandoval();
+	    			    listaLuchs.add(peleador);
+	    			    System.out.println("Se creo un luchador");}
+	    		        break;
+	    		        
+	    		case 3: inventarioLuchadores most = new inventarioLuchadores();
+		    		//se crea objeto most para postrar luchadores del inventario
+    				most.mostrarInv();     		
+	    			    break;
+	    			    
+	    		case 4: inventarioLuchadores ver = new inventarioLuchadores();
+		    		//"ver" es un objeto creado para usar el metodo verUnLuchador de inventarioLuchadores
+		    			    do{//"opc" y "leer" son reusados de arriba	    			
+		    				System.out.println("Escoja el luchador que desea ver (desde el 0 al 14)");
+		    				opc = leer.nextInt();
+		    				}while(opc>(listaLuchs.size()-1) || opc<0);	    		          
+		    		         ver.verUnLuchador(opc);	
+	    				break;
+	    			   
+	    		case 5: inventarioLuchadores inv = new inventarioLuchadores();
+	    			if(inv.inventario.size()==0){
+	    				System.out.println("No hay luchadores en el inventario");}
+	    		else{
+	    			do{
+	    				//"opc" y "leer" son reusados de arriba	    			
+	    				System.out.println("Escoja un luchador que desea eliminar (desde el 0 al 14)");
+	    				opc = leer.nextInt();
+	    				}while(opc>(inv.inventario.size()-1) || opc<0);	    		          
+	    		          inv.eliminarUnluchador();  }
+	    			    break;
+	    			    
+	    		case 6: inventarioLuchadores inven = new inventarioLuchadores();
+	    		         inven.filtrar();
+	    				//inv.Filtrar(listaLuchs);
+	    				break;
+	    				
+	    		case 7: if(listaLuchs.size()==0){
+	    			System.out.println("No hay luchadores para mover al inventario");}
+	    		else{ 
+	    			inventarioLuchadores invent= new inventarioLuchadores();
+	    		  		invent.agregarLuchador(listaLuchs);	  }  			    
+	    				break; 
+	    				
+	    		case 8: ObjetoEquipable obj= new ObjetoEquipable();
+		        		System.out.println("Se ha creado un objeto equipable");
+		        		obj.mostrarArma();
+	    			    break;
+	    				
+	    		case 9: Monstruo mons= new Monstruo();
+	    		        System.out.println("Se ha creado un monstruo");
+	    		        mons.mostrarMonstruo();
+	    			   break;
+	    			
+	    		case 10: System.out.println("Adios");
+	    			   break;    	 
+	    	}
+	    	}while(opc!=10);
+	    }	
 }

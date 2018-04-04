@@ -1,17 +1,22 @@
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class ObjetoEquipable {	
+	private String nom;
 	private int mejoraBase;
     private int estrellas;
     private int mejoraFinal;
+    private String estadistica;
     
     public ArrayList<ObjetoEquipable> objetos= new ArrayList<ObjetoEquipable>();
     
     public ObjetoEquipable(){
+    	this.nom = elegirNombre(nombres());
         this.mejoraBase =  obtenerMejoraBase();
         this.estrellas = obtenerEstrellas();
-        this.mejoraFinal = obtenerMejoraFinal();        
-    } 	    
+        this.mejoraFinal = obtenerMejoraFinal();      
+        this.estadistica = elegirEst(estadisticas());
+    }     
     //Metodos que final la base, estrellas y mejora final del objeto equipable
     public static int obtenerMejoraBase(){
             int mejoraBase = (int) (Math.random()*9+1);
@@ -39,27 +44,63 @@ public class ObjetoEquipable {
         mejoraFinal = mejoraBase*estrellas;
         return mejoraFinal;
     }   
-    //Metodos para ver en la consola
-    public void mostrarMejoraBase(){
+    //Metodo para darle "nombre" al arma
+    private static String[] nombres(){
+	    String [] nom  = new String[5];
+	    nom[0]="Maza";
+	    nom[1]="Staff";
+	    nom[2]="Espada";
+	    nom[3]="Escudo";
+	    nom[4]="Dagas";
+	    return nom;
+	    }   
+    private static String elegirNombre(String []nom){
+ 	    int n = (int)(Math.random()*5);
+ 	    String name = nom[n];
+ 	    return name;
+ 	    }
+    private static String[] estadisticas(){
+ 		    String [] stat  = new String[4];
+ 		    stat[0]="HP";
+ 		    stat[1]="ATK";
+ 		    stat[2]="DEF";
+ 		    stat[3]="SPD";
+ 		    return stat;
+ 		    }   
+ 	    private static String elegirEst(String []stat){
+ 	 	    int e = (int)(Math.random()*4);
+ 	 	    String estadistica = stat[e];
+ 	 	    return estadistica;
+ 	 	    }
+    //Metodo para ver en la consola
+    public void mostrarArma(){
         System.out.println("Mejora Base: " + mejoraBase);
-    }
-    public void mostrarEstrellas(){
         System.out.println("Estrellas del objeto: " + estrellas);
-    }    
-    public void mostrarMejoraFinal(){
-        System.out.println("Mejora Total: " + mejoraFinal);
+        System.out.println("Mejora Total: " + mejoraFinal+" a la estadistica "+estadistica);
+        System.out.println("");
     }
-  //Metodos get y set
-    
-    public String getMejoraBase() {
+  //Metodos get y set    
+    public int getMejoraBase() {
    	 return this.mejoraBase;	   	 
     }
     public int getEstrellas() {
    	 return this.estrellas;
     }
-    public String getMejoraFinal() {
+    public int getMejoraFinal() {
     return this.mejoraFinal;
     } 
+    public String getNom() {
+        return this.nom;        
+        } 
+    public String getEstadistica() {
+        return this.estadistica;
+        } 
+    public void setEstadistica(String estadistica) {
+       	this.nom=estadistica;
+       }
+    public void setNom(String nom) {
+       	this.nom=nom;
+       }
    public void setMejoraBase(int mejoraBase) {
    	this.mejoraBase=mejoraBase;
    }
