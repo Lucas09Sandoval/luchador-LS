@@ -4,8 +4,6 @@ public class inventarioLuchadores {
 	
 	static ArrayList<luchador_LucasSandoval> inventario = new ArrayList<luchador_LucasSandoval>();
 	
-//Metodos para "agregar", "mostrar todos" y "ver un luchador" en la clase Luchador_LucasSandoval
-	
 	 //Metodo que mustre todos los luchadores del inventario
 	public void mostrarInv(){
 		for(int i=0; i<inventario.size();i++){	    		
@@ -16,7 +14,7 @@ public class inventarioLuchadores {
 		}  
 	}
 	
-	//Metodo que muestra un solo luchador con todos sus datos	    	
+	//Metodo que muestra un solo luchador del arraylist inventario con todos sus datos	    	
 	  public void verUnLuchador(int opc){
 	    	System.out.println("Luchador N°"+" "+opc);
 	    	System.out.println("Nombre "+inventario.get(opc).getNom());
@@ -41,9 +39,10 @@ public class inventarioLuchadores {
 	        listaLuchs.remove(opc);
 	        System.out.println("Se agrego un luchador al inventario");
 	        //for para probar el arraylist siguiente
+	        /*
 	        for(int i=0;i<inventario.size();i++){
 	        System.out.println(inventario.get(i).getNom());
-	        }
+	        }*/
 	}		
 	//Metodo que elimina un luchador
 	   public void eliminarUnluchador(){
@@ -56,12 +55,13 @@ public class inventarioLuchadores {
 		        inventario.remove(opc);
 		        System.out.println("Se elimino un luchador del inventario");
 		        //for para probar el arraylist siguiente
+		        /*
 		        for(int i=0;i<inventario.size();i++){
 		        System.out.println(inventario.get(i).getNom());
-		        }	
+		        }	*/
 	    } 
 	//Metodo que filtra los luchadores
-	public void filtrar(){
+	public void filtrarLuch(){
 		
 		int opc;
 		Scanner leer = new Scanner(System.in);

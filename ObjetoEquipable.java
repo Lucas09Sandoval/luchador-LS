@@ -8,7 +8,7 @@ public class ObjetoEquipable {
     private int mejoraFinal;
     private String estadistica;
     
-    public ArrayList<ObjetoEquipable> objetos= new ArrayList<ObjetoEquipable>();
+    static ArrayList<ObjetoEquipable> objetos= new ArrayList<ObjetoEquipable>();
     
     public ObjetoEquipable(){
     	this.nom = elegirNombre(nombres());
@@ -16,7 +16,18 @@ public class ObjetoEquipable {
         this.estrellas = obtenerEstrellas();
         this.mejoraFinal = obtenerMejoraFinal();      
         this.estadistica = elegirEst(estadisticas());
-    }     
+    }    
+    //metodo para mostrar el objeto dropeado de un monstruo
+    public void mostrarDrop(){
+    	System.out.println("Nombre: "+nom);
+    	System.out.println("Estrellas: "+estrellas);
+    	System.out.println("Mejora total: "+mejoraFinal +" al "+estadistica);
+    }    
+  //Metodo que crea un Objeto en el arraylist objetos
+	private void crearObjeto(){
+		ObjetoEquipable item = new ObjetoEquipable();
+		objetos.add(item);
+	}
     //Metodos que final la base, estrellas y mejora final del objeto equipable
     public static int obtenerMejoraBase(){
             int mejoraBase = (int) (Math.random()*9+1);
@@ -71,13 +82,17 @@ public class ObjetoEquipable {
  	 	    int e = (int)(Math.random()*4);
  	 	    String estadistica = stat[e];
  	 	    return estadistica;
- 	 	    }
+ 	 	    } 	 
     //Metodo para ver en la consola
-    public void mostrarArma(){
-        System.out.println("Mejora Base: " + mejoraBase);
-        System.out.println("Estrellas del objeto: " + estrellas);
-        System.out.println("Mejora Total: " + mejoraFinal+" a la estadistica "+estadistica);
-        System.out.println("");
+    public void mostrarObjetos(){
+    	for(int i=0; i<objetos.size();i++){ 
+    		System.out.println("Obj N°:"+" "+i+"\t"+"Nombre: "+ objetos.get(i).getNom());
+    		System.out.println("Estrellas: "+objetos.get(i).getEstrellas());
+    		System.out.println("Mejora Base: "+objetos.get(i).getMejoraBase());
+    		System.out.println("Mejora Final: "+ objetos.get(i).getMejoraFinal());
+    		System.out.println("Estadistica: "+ objetos.get(i).getEstadistica());
+	        System.out.println("");   		 
+    	}
     }
   //Metodos get y set    
     public int getMejoraBase() {

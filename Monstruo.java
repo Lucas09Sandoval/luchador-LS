@@ -5,14 +5,24 @@ public class Monstruo {
 	private int atk;
 	private int def;
 	private int spd;
+	private String nom;
 	
-	//Constructor
+	//Constructor de la clase monstruo
 	public Monstruo(){
+		this.nom = elegirNombre(nombresDeMonstruo());
 		this.hp = hp();
 		this.atk= atk();
 		this.def= def();
 		this.spd= spd();		
 	}
+	//metodo que dropea un objeto
+	public static void crearObjetoDropeable(){
+		System.out.println("El monstruo a sido derrotado");
+		System.out.println("DROP:");
+		ObjetoEquipable drop = new ObjetoEquipable();
+		drop.mostrarDrop();
+	}
+	
 	//método que muestra el monstruo creado
 	public void mostrarMonstruo(){
 		System.out.println("HP: "+"\t"+hp);
@@ -21,7 +31,20 @@ public class Monstruo {
 		System.out.println("SPD: "+"\t"+spd);		
 	}
 	
-	//métodos que generan las estadisticas del monstruo
+	//métodos que generan el nombre y las estadisticas del monstruo
+    private static String[] nombresDeMonstruo(){
+    String [] monstruos  = new String[3];
+    monstruos[0]="Ghost Rider";
+    monstruos[1]="Dark Veilnus";
+    monstruos[2]="Vanir";
+    	   
+    return monstruos;
+    }	    
+    private static String elegirNombre(String []monstruos){
+    int m = (int)(Math.random()*3);
+    String nombre = monstruos[m];
+    return nombre;
+    }	   
 	 private static int hp(){
 	        int hp = (int)(Math.random()*3501+500);
 	        return hp;
@@ -51,7 +74,13 @@ public class Monstruo {
 	   }
 	   public int getSpd() {
 	   	return this.spd;
-	   }	  
+	   }
+	   public String getNom() {
+		   	return this.nom;
+		   }	  
+		   public void setNom(String nom) {
+		   	this.nom=nom;
+		   }
 	   public void setAtk(int atk) {
 	   	this.atk=atk;
 	   }
@@ -63,5 +92,5 @@ public class Monstruo {
 	   }
 	   public void setSpd(int spd) {
 	   	this.spd=spd;
-	   }
+	   }	   
 }

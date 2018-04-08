@@ -1,1 +1,1 @@
-Avance 1 y 2 completo, con un menu para probar si funciona 
+Avance 3 del proyecto de ayudantía
