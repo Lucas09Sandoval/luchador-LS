@@ -15,7 +15,17 @@ public class inventarioLuchadores {
 	}
 	
 	//Metodo que muestra un solo luchador del arraylist inventario con todos sus datos	    	
-	  public void verUnLuchador(int opc){
+	  public void verUnLuchador(){
+		  if(inventario.size()==0){
+			  System.out.println("No hay luchadores en el inventario");
+		  }else{
+		  int opc =0;
+		  Scanner leer = new Scanner(System.in);
+		  do{//"opc" y "leer" son reusados de arriba	    			
+				System.out.println("Escoja el luchador que desea ver (desde el 0 al 14)");
+				opc = leer.nextInt();
+				}while(opc>(inventario.size()-1) || opc<0);		  
+		  
 	    	System.out.println("Luchador N°"+" "+opc);
 	    	System.out.println("Nombre "+inventario.get(opc).getNom());
    		System.out.println("Rango "+"\t"+inventario.get(opc).getRango());
@@ -24,41 +34,40 @@ public class inventarioLuchadores {
    		System.out.println("ATK "+"\t"+inventario.get(opc).getAtk());
    		System.out.println("DEF "+"\t"+inventario.get(opc).getDef());
    		System.out.println("SPD "+"\t"+inventario.get(opc).getSpd());
-   		System.out.println(""); 	    	
+   		System.out.println(""); 
+		  }
 	    }	   
 	
 	//Metodo que agrega luchador al inventario
 	public void agregarLuchador(ArrayList<luchador_LucasSandoval>listaLuchs){
-		Scanner leer = new Scanner(System.in);
-		int opc;
-		do{
-		    System.out.println("Ingrese luchador que desea agregar");
-		    opc= leer.nextInt();
-		}while(opc>(listaLuchs.size()-1));	    		        	
-	        inventario.add(listaLuchs.get(opc));
-	        listaLuchs.remove(opc);
-	        System.out.println("Se agrego un luchador al inventario");
-	        //for para probar el arraylist siguiente
-	        /*
-	        for(int i=0;i<inventario.size();i++){
-	        System.out.println(inventario.get(i).getNom());
-	        }*/
+		if(listaLuchs.size()==0){
+			System.out.println("No hay luchadores para mover al inventario");}
+		else{
+			Scanner leer = new Scanner(System.in);
+			int opc;
+			do{
+			    System.out.println("Ingrese luchador que desea agregar");
+			    opc= leer.nextInt();
+			}while(opc>(listaLuchs.size()-1));	    		        	
+		        inventario.add(listaLuchs.get(opc));
+		        listaLuchs.remove(opc);
+		        System.out.println("Se agrego un luchador al inventario");
+		}  
+		
 	}		
 	//Metodo que elimina un luchador
 	   public void eliminarUnluchador(){
+		   int opc=0;
 		   Scanner leer = new Scanner(System.in);
-			int opc;
-			do{
-			    System.out.println("Ingrese luchador que desea eliminar");
-			    opc= leer.nextInt();
-			}while(opc>(inventario.size()-1));	    		        	
-		        inventario.remove(opc);
-		        System.out.println("Se elimino un luchador del inventario");
-		        //for para probar el arraylist siguiente
-		        /*
-		        for(int i=0;i<inventario.size();i++){
-		        System.out.println(inventario.get(i).getNom());
-		        }	*/
+		   if(inventario.size()==0){
+				System.out.println("No hay luchadores en el inventario");}
+		else{
+			do{    			
+				System.out.println("Escoja un luchador que desea eliminar (desde el 0 al 14)");
+				opc = leer.nextInt();
+				}while(opc>(inventario.size()-1) || opc<0);  }
+		   inventario.remove(opc);
+	        System.out.println("Se elimino un luchador del inventario");
 	    } 
 	//Metodo que filtra los luchadores
 	public void filtrarLuch(){

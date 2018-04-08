@@ -25,6 +25,8 @@ public class Monstruo {
 	
 	//método que muestra el monstruo creado
 	public void mostrarMonstruo(){
+		System.out.println("Se ha creado un monstruo");
+		System.out.println("Nombre: "+nom);
 		System.out.println("HP: "+"\t"+hp);
 		System.out.println("ATK: "+"\t"+atk);
 		System.out.println("DEF: "+"\t"+def);

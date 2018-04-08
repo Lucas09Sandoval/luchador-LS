@@ -24,7 +24,8 @@ public class ObjetoEquipable {
     	System.out.println("Mejora total: "+mejoraFinal +" al "+estadistica);
     }    
   //Metodo que crea un Objeto en el arraylist objetos
-	private void crearObjeto(){
+	public void crearObjeto(){
+		System.out.println("Se ha creado un objeto equipable");
 		ObjetoEquipable item = new ObjetoEquipable();
 		objetos.add(item);
 	}

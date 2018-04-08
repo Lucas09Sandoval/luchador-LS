@@ -27,12 +27,17 @@ public class luchador_LucasSandoval {
     	this.spd = spd();  	 	
     }    
 	//Metodo que crea un luchador en el arraylist listaLuchs
-	private void crearLuchador(){
-		luchador_LucasSandoval luchador = new luchador_LucasSandoval();
-		listaLuchs.add(luchador);
+	public void crearUnLuchador(){
+		if((listaLuchs.size())==15){
+			System.out.println("Se alcanzo el límite de luchadores");
+		}else{
+			luchador_LucasSandoval luchador = new luchador_LucasSandoval();
+			listaLuchs.add(luchador);
+			System.out.println("Se creo un luchador");
+		}
 	}
 	    //Metodo que muestre todos los luchadores de listaLuchs
-	    	public static void mostrarLuchadores(){
+	    	public void mostrarLuchadores(){
 	    		System.out.println("Luchadores de listaLuchs son:");
 	    		for(int i=0; i<listaLuchs.size();i++){	    		
 	    		System.out.print("Luchador N°"+" "+i+"\t"+"Nombre "+listaLuchs.get(i).getNom());

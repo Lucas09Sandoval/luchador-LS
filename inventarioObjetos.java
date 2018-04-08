@@ -18,6 +18,9 @@ public class inventarioObjetos {
 		}		
 		//Metodo que agrega un objeto al inventario de objetos
 		public void agregarObjeto(ArrayList<ObjetoEquipable> objetos){
+			if(objetos.size()==0){
+				System.out.println("No hay objetos para mover al inventario");}
+			else{
 			Scanner leer = new Scanner(System.in);
 			int opc;
 			do{
@@ -27,13 +30,13 @@ public class inventarioObjetos {
 		        inventarioObj.add(objetos.get(opc));
 		        objetos.remove(opc);
 		        System.out.println("Se agrego un objeto al inventario de objetos");
-		        //for para probar el arraylist siguiente
-		        /* for(int i=0;i<inventarioObj.size();i++){
-		        System.out.println(inventarioObj.get(i).getNom());
-		        }*/
+		        }
 		}		
 		//Metodo que elimina un Objeto
 		   public void eliminarUnObjeto(){
+			   if(inventarioObj.size()==0){
+					System.out.println("No hay objetos para mover al inventario");}
+				else{
 			   Scanner leer = new Scanner(System.in);
 				int opc;
 				do{
@@ -42,11 +45,7 @@ public class inventarioObjetos {
 				}while(opc>(inventarioObj.size()-1));	    		        	
 			        inventarioObj.remove(opc);
 			        System.out.println("Se elimino un objeto del inventario de objetos");
-			        //for para probar el arraylist siguiente
-			        /*
-			        for(int i=0;i<inventarioObj.size();i++){
-			        System.out.println(inventarioObj.get(i).getNom());
-			        }	*/
+				}
 		    } 
 		//Metodo que filtra los Objetos
 		public void filtrarObj(){
