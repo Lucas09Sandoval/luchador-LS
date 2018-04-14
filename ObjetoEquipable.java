@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.lang.Math;
 
 public class ObjetoEquipable {	
@@ -7,8 +6,6 @@ public class ObjetoEquipable {
     private int estrellas;
     private int mejoraFinal;
     private String estadistica;
-    
-    static ArrayList<ObjetoEquipable> objetos= new ArrayList<ObjetoEquipable>();
     
     public ObjetoEquipable(){
     	this.nom = elegirNombre(nombres());
@@ -22,13 +19,8 @@ public class ObjetoEquipable {
     	System.out.println("Nombre: "+nom);
     	System.out.println("Estrellas: "+estrellas);
     	System.out.println("Mejora total: "+mejoraFinal +" al "+estadistica);
-    }    
-  //Metodo que crea un Objeto en el arraylist objetos
-	public void crearObjeto(){
-		System.out.println("Se ha creado un objeto equipable");
-		ObjetoEquipable item = new ObjetoEquipable();
-		objetos.add(item);
-	}
+    }
+    
     //Metodos que final la base, estrellas y mejora final del objeto equipable
     public static int obtenerMejoraBase(){
             int mejoraBase = (int) (Math.random()*9+1);
@@ -84,17 +76,7 @@ public class ObjetoEquipable {
  	 	    String estadistica = stat[e];
  	 	    return estadistica;
  	 	    } 	 
-    //Metodo para ver en la consola
-    public void mostrarObjetos(){
-    	for(int i=0; i<objetos.size();i++){ 
-    		System.out.println("Obj N°:"+" "+i+"\t"+"Nombre: "+ objetos.get(i).getNom());
-    		System.out.println("Estrellas: "+objetos.get(i).getEstrellas());
-    		System.out.println("Mejora Base: "+objetos.get(i).getMejoraBase());
-    		System.out.println("Mejora Final: "+ objetos.get(i).getMejoraFinal());
-    		System.out.println("Estadistica: "+ objetos.get(i).getEstadistica());
-	        System.out.println("");   		 
-    	}
-    }
+   
   //Metodos get y set    
     public int getMejoraBase() {
    	 return this.mejoraBase;	   	 

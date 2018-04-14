@@ -1,5 +1,4 @@
 import java.lang.Math;
-import java.util.ArrayList;
 
 public class luchador_LucasSandoval {	
 	private String nombre;
@@ -9,12 +8,7 @@ public class luchador_LucasSandoval {
 	private int atk;
 	private int def;
 	private int spd;	
-	/* listaLuchs es el ArrayList donde se guardan los luchadores creados
-	  no es privado, porque al mover(agregar) un luchador
-	  al arraylist inventario(de la clase inventarioLuchadores)
-	  este es eliminado de listaLuchs
-   */	
-	static ArrayList<luchador_LucasSandoval> listaLuchs= new ArrayList<luchador_LucasSandoval>();
+	
 	//Constructor de la clase
 	public luchador_LucasSandoval(){
     	//los datos base de cada luchador creado
@@ -25,31 +19,7 @@ public class luchador_LucasSandoval {
     	this.atk = atk();
     	this.def = def();
     	this.spd = spd();  	 	
-    }    
-	//Metodo que crea un luchador en el arraylist listaLuchs
-	public void crearUnLuchador(){
-		if((listaLuchs.size())==15){
-			System.out.println("Se alcanzo el límite de luchadores");
-		}else{
-			luchador_LucasSandoval luchador = new luchador_LucasSandoval();
-			listaLuchs.add(luchador);
-			System.out.println("Se creo un luchador");
-		}
-	}
-	    //Metodo que muestre todos los luchadores de listaLuchs
-	    	public void mostrarLuchadores(){
-	    		System.out.println("Luchadores de listaLuchs son:");
-	    		for(int i=0; i<listaLuchs.size();i++){	    		
-	    		System.out.print("Luchador N°"+" "+i+"\t"+"Nombre "+listaLuchs.get(i).getNom());
-	    		System.out.print("\t"+"Rango "+"\t"+listaLuchs.get(i).getRango());
-	    		System.out.print("\t"+"Facción "+"\t"+listaLuchs.get(i).getFaccion());
-	    		System.out.print("\t"+"HP:"+listaLuchs.get(i).getHp());
-	    		System.out.print("\t"+"ATK:"+listaLuchs.get(i).getAtk());
-	    		System.out.print("\t"+"DEF:"+" "+listaLuchs.get(i).getDef());
-	    		System.out.print("\t"+"SPD:"+listaLuchs.get(i).getSpd());
-	    		System.out.println(""); 	
-	    		}  
-	    	}    	  	
+    }   	  	
 //Metodos para crear los datos de un luchador (Nombre, faccion, rango, estadisticas)
 	    private static String[] nombres(){
 	    String [] peleadores  = new String[15];

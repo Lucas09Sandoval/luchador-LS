@@ -2,21 +2,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class inventarioLuchadores {
 	
-	static ArrayList<luchador_LucasSandoval> inventario = new ArrayList<luchador_LucasSandoval>();
+	static ArrayList<luchador_LucasSandoval> inventarioLuch = new ArrayList<luchador_LucasSandoval>();
 	
 	 //Metodo que mustre todos los luchadores del inventario
 	public void mostrarInv(){
-		for(int i=0; i<inventario.size();i++){	    		
-		System.out.print("Luchador N°"+" "+i+"\t"+"Nombre "+inventario.get(i).getNom());
-		System.out.print("\t"+"Rango "+"\t"+inventario.get(i).getRango());
-		System.out.print("\t"+"Facción "+"\t"+inventario.get(i).getFaccion());
+		for(int i=0; i<inventarioLuch.size();i++){	    		
+		System.out.print("Luchador N°"+" "+i+"\t"+"Nombre "+inventarioLuch.get(i).getNom());
+		System.out.print("\t"+"Rango "+"\t"+inventarioLuch.get(i).getRango());
+		System.out.print("\t"+"Facción "+"\t"+inventarioLuch.get(i).getFaccion());
 		System.out.println(""); 	
 		}  
 	}
 	
 	//Metodo que muestra un solo luchador del arraylist inventario con todos sus datos	    	
 	  public void verUnLuchador(){
-		  if(inventario.size()==0){
+		  if(inventarioLuch.size()==0){
 			  System.out.println("No hay luchadores en el inventario");
 		  }else{
 		  int opc =0;
@@ -24,49 +24,41 @@ public class inventarioLuchadores {
 		  do{//"opc" y "leer" son reusados de arriba	    			
 				System.out.println("Escoja el luchador que desea ver (desde el 0 al 14)");
 				opc = leer.nextInt();
-				}while(opc>(inventario.size()-1) || opc<0);		  
+				}while(opc>(inventarioLuch.size()-1) || opc<0);		  
 		  
 	    	System.out.println("Luchador N°"+" "+opc);
-	    	System.out.println("Nombre "+inventario.get(opc).getNom());
-   		System.out.println("Rango "+"\t"+inventario.get(opc).getRango());
-   		System.out.println("Facción "+"\t"+inventario.get(opc).getFaccion());
-   		System.out.println("HP "+"\t"+inventario.get(opc).getHp());
-   		System.out.println("ATK "+"\t"+inventario.get(opc).getAtk());
-   		System.out.println("DEF "+"\t"+inventario.get(opc).getDef());
-   		System.out.println("SPD "+"\t"+inventario.get(opc).getSpd());
+	    	System.out.println("Nombre "+inventarioLuch.get(opc).getNom());
+   		System.out.println("Rango "+"\t"+inventarioLuch.get(opc).getRango());
+   		System.out.println("Facción "+"\t"+inventarioLuch.get(opc).getFaccion());
+   		System.out.println("HP "+"\t"+inventarioLuch.get(opc).getHp());
+   		System.out.println("ATK "+"\t"+inventarioLuch.get(opc).getAtk());
+   		System.out.println("DEF "+"\t"+inventarioLuch.get(opc).getDef());
+   		System.out.println("SPD "+"\t"+inventarioLuch.get(opc).getSpd());
    		System.out.println(""); 
 		  }
 	    }	   
 	
 	//Metodo que agrega luchador al inventario
-	public void agregarLuchador(ArrayList<luchador_LucasSandoval>listaLuchs){
-		if(listaLuchs.size()==0){
-			System.out.println("No hay luchadores para mover al inventario");}
-		else{
-			Scanner leer = new Scanner(System.in);
-			int opc;
-			do{
-			    System.out.println("Ingrese luchador que desea agregar");
-			    opc= leer.nextInt();
-			}while(opc>(listaLuchs.size()-1));	    		        	
-		        inventario.add(listaLuchs.get(opc));
-		        listaLuchs.remove(opc);
-		        System.out.println("Se agrego un luchador al inventario");
+	public void agregarLuchador(){
+		if(inventarioLuch.size()==25){
+			System.out.println("No se pueden agregar más luchadores");			
+		}else{
+			System.out.println("Se ha agregado un luchador");
+		luchador_LucasSandoval luchador = new luchador_LucasSandoval();
+		inventarioLuch.add(luchador);}
 		}  
-		
-	}		
 	//Metodo que elimina un luchador
 	   public void eliminarUnluchador(){
 		   int opc=0;
 		   Scanner leer = new Scanner(System.in);
-		   if(inventario.size()==0){
+		   if(inventarioLuch.size()==0){
 				System.out.println("No hay luchadores en el inventario");}
 		else{
 			do{    			
 				System.out.println("Escoja un luchador que desea eliminar (desde el 0 al 14)");
 				opc = leer.nextInt();
-				}while(opc>(inventario.size()-1) || opc<0);  }
-		   inventario.remove(opc);
+				}while(opc>(inventarioLuch.size()-1) || opc<0);  }
+		   inventarioLuch.remove(opc);
 	        System.out.println("Se elimino un luchador del inventario");
 	    } 
 	//Metodo que filtra los luchadores
@@ -90,8 +82,8 @@ public class inventarioLuchadores {
 			rang = leer.nextInt();
 			}while(rang>5 || rang<1);
 			
-			for(int i=0;i<inventario.size();i++){
-				if(inventario.get(i).getRango()==rang){
+			for(int i=0;i<inventarioLuch.size();i++){
+				if(inventarioLuch.get(i).getRango()==rang){
 					System.out.println("El peleador N°"+i);
 					a++;
 				}				
@@ -109,8 +101,8 @@ public class inventarioLuchadores {
 		        if(fac==2){F= "Fuego";}
 		        if(fac==3){F= "Tierra";}
 		        
-				for(int i=0;i<inventario.size();i++){
-					if(F.equals(inventario.get(i).getFaccion())){
+				for(int i=0;i<inventarioLuch.size();i++){
+					if(F.equals(inventarioLuch.get(i).getFaccion())){
 						System.out.println("El peleador N°"+i);
 						a++;
 					}				

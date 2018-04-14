@@ -1,3 +1,4 @@
+import java.lang.Math;
 
 public class Monstruo {
 	//los datos base de cada Monstruo creado
@@ -6,10 +7,12 @@ public class Monstruo {
 	private int def;
 	private int spd;
 	private String nom;
+	private String faccion;
 	
 	//Constructor de la clase monstruo
 	public Monstruo(){
 		this.nom = elegirNombre(nombresDeMonstruo());
+		this.faccion= elegirFaccion(faccionMonstruo());
 		this.hp = hp();
 		this.atk= atk();
 		this.def= def();
@@ -27,13 +30,18 @@ public class Monstruo {
 	public void mostrarMonstruo(){
 		System.out.println("Se ha creado un monstruo");
 		System.out.println("Nombre: "+nom);
+		System.out.println("Faccion: "+ faccion);
 		System.out.println("HP: "+"\t"+hp);
 		System.out.println("ATK: "+"\t"+atk);
 		System.out.println("DEF: "+"\t"+def);
-		System.out.println("SPD: "+"\t"+spd);		
+		System.out.println("SPD: "+"\t"+spd);	
+		
+		ObjetoEquipable drop = new ObjetoEquipable();		
+		System.out.println("y el objeto que dropea es:");
+		drop.mostrarDrop();
 	}
 	
-	//métodos que generan el nombre y las estadisticas del monstruo
+	//métodos que generan el nombre, faccion y las estadisticas del monstruo
     private static String[] nombresDeMonstruo(){
     String [] monstruos  = new String[3];
     monstruos[0]="Ghost Rider";
@@ -46,7 +54,20 @@ public class Monstruo {
     int m = (int)(Math.random()*3);
     String nombre = monstruos[m];
     return nombre;
-    }	   
+    }	 
+    private static String[] faccionMonstruo(){
+	    String [] faccion = new String[3];
+	    faccion[0]="Agua";
+	    faccion[1]="Fuego";
+	    faccion[2]="Tierra";
+	    return faccion;
+	    }	    
+	    private static String elegirFaccion(String[]faccion){
+	    //f variable para obtener facción
+	    int f = (int)(Math.random()*3);
+	    String tipo = faccion[f];
+	    return tipo;
+	    }
 	 private static int hp(){
 	        int hp = (int)(Math.random()*3501+500);
 	        return hp;
