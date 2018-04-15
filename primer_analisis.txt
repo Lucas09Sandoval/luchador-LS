@@ -1,7 +1,12 @@
+Análisis:
+
 1)La clase "inventarioLuchadores" depende de la clase "luchador_LucasSandoval" 
 para poder cumplir su función de almacenar los luchadores en un arreglo 
 con un límite de 15, pero la clase "luchador_LucasSandoval" no
 requiere de un inventario para funcionar.
+A demás, hay que tener en cuenta que debe existir si o si un luchador
+dentro del inventario ya que no tendría sentido que un usuario juegue
+sin tener peleadores (por eso 1:15).
 
 2)La relación entre "ObjetoEquipable" e "invetarioObjetos" es similar a la del 
 "inventarioLuchadores" con "luchador_LucasSandoval", pues la clase 
@@ -9,6 +14,10 @@ requiere de un inventario para funcionar.
 es usada para crear objetos que seran almacenados en el arraylist
 de la clase "inventarioObjetos",para luego poder usar los
 métodos de esta clase en los objetos almacenados.
+A diferencia de la clase luchador_LucasSandoval e
+inventarioLuchadores, al momento de que un usuario use el programa, 
+este debe poder jugar sin tener objetos (por eso 0:10). 
 
 3)La relación entre "Monstruo" y "ObjetoEquipable" es solo de un uso único,
-pues la clase "Monstruo" solo usa la otra para poder crear un objeto.
+pues la clase "Monstruo" solo usa la otra para poder crear un objeto que el monstruo
+dropeara cuando muera.
