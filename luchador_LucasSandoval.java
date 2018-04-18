@@ -15,11 +15,28 @@ public class luchador_LucasSandoval {
     	this.nombre= elegirNombre(nombres());
     	this.rango= rango();
     	this.faccion= elegirFaccion(faccion());
-    	this.hp = hp();
-    	this.atk = atk();
-    	this.def = def();
-    	this.spd = spd();  	 	
-    }   	  	
+    	this.hp = hp()*rango;
+    	this.atk = atk()*rango;
+    	this.def = def()*rango;
+    	this.spd = spd()*rango;  	 	
+    }   	
+	//Método main creado para probar metodo mostrarLuchador
+	/*public static void main(String[]args){
+			luchador_LucasSandoval lucas = new luchador_LucasSandoval();
+			lucas.mostrarLuchador();
+	}*/
+	//Método para mostrar datos
+	public void mostrarLuchador(){
+				System.out.println("Nombre: "+nombre);
+				System.out.println("Facción: "+ faccion);
+				System.out.println("Rango: "+ rango);
+				System.out.println("Hp: "+hp);
+				System.out.println("ATK: "+atk);
+				System.out.println("DEF "+def);
+				System.out.println("SPD: "+ spd);
+				
+	}
+	
 //Metodos para crear los datos de un luchador (Nombre, faccion, rango, estadisticas)
 	    private static String[] nombres(){
 	    String [] peleadores  = new String[15];

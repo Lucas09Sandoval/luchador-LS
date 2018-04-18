@@ -6,7 +6,7 @@ con un límite de 15, pero la clase "luchador_LucasSandoval" no
 requiere de un inventario para funcionar.
 A demás, hay que tener en cuenta que debe existir si o si un luchador
 dentro del inventario ya que no tendría sentido que un usuario juegue
-sin tener peleadores (por eso 1:15).
+sin tener peleadores (por eso 1:25).
 
 2)La relación entre "ObjetoEquipable" e "invetarioObjetos" es similar a la del 
 "inventarioLuchadores" con "luchador_LucasSandoval", pues la clase 
