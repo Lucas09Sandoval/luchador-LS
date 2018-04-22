@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-public class inventarioLuchadores {
+public class InventarioLuchadores {
 	
-	static ArrayList<luchador_LucasSandoval> inventarioLuch = new ArrayList<luchador_LucasSandoval>();
+	static ArrayList<Luchador> inventarioLuch = new ArrayList<Luchador>();
 	
 	 //Metodo que mustre todos los luchadores del inventario
 	public void mostrarInv(){
@@ -44,7 +44,7 @@ public class inventarioLuchadores {
 			System.out.println("No se pueden agregar más luchadores");			
 		}else{
 			System.out.println("Se ha agregado un luchador");
-		luchador_LucasSandoval luchador = new luchador_LucasSandoval();
+		Luchador luchador = new Luchador();
 		inventarioLuch.add(luchador);}
 		}  
 	//Metodo que elimina un luchador

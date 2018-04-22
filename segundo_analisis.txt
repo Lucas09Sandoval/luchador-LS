@@ -1,0 +1,26 @@
+Analisis2:
+
+1)La clase "InventarioLuchadores" depende de "Luchador" para
+poder cumplir su unica función de importancia que es
+almacenar luchadores(en una razón de 1 a 25).
+Lo mismo aplica en la relación de "InventarioObjetos"
+con "ObjetoEquipable"(pero en una razón de 0 a 10 y con la clase 
+"InventarioObjetos" almacenando objetos de la clase ObjetoEquipable).
+
+2)Las clases "Luchador" y "ObjetoEquipable" no dependen de ninguna 
+otra clase para cumplir sus respectivas funciones.
+
+3)La clase "Monstruo" usa la clase "ObjetoEquipable" para 
+poder tener un objeto que dropeara, la forma en que fue implementado
+esto en el codigo fue haciendo un "ObjetoEquipable" llamado "drop"
+que formara parte de los atributos del monstruo (es decir, el monstruo
+tiene un objeto de la clase "ObjetoEquipable").
+
+4)La clase "Batalla" requiere de las clases "Luchador" y "Monstruo"
+para cumplir su unica función, que es permitir a un usuario poder 
+"jugar" haciendo que su equipo de luchadores batallen contra
+un monstruo. Para hacer esto se usaran 3 arrayList, uno llamado
+"equipo" que almacenara los luchadores(en este caso 6 al azar),
+otro llamado "enemigo" que almacenara los Monstruos con los que 
+se pelearan(en este caso 1 solo), y el tercero llamado "turno", para poder 
+ordenar los turnos en que los luchadores atacaran al monstruo.

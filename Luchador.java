@@ -1,6 +1,6 @@
 import java.lang.Math;
 
-public class luchador_LucasSandoval {	
+public class Luchador {	
 	private String nombre;
 	private int rango;
 	private String faccion;
@@ -8,9 +8,10 @@ public class luchador_LucasSandoval {
 	private int atk;
 	private int def;
 	private int spd;	
+	private ObjetoEquipable objeto;
 	
 	//Constructor de la clase
-	public luchador_LucasSandoval(){
+	public Luchador(){
     	//los datos base de cada luchador creado
     	this.nombre= elegirNombre(nombres());
     	this.rango= rango();
@@ -18,13 +19,48 @@ public class luchador_LucasSandoval {
     	this.hp = hp()*rango;
     	this.atk = atk()*rango;
     	this.def = def()*rango;
-    	this.spd = spd()*rango;  	 	
-    }   	
-	//Método main creado para probar metodo mostrarLuchador
-	/*public static void main(String[]args){
-			luchador_LucasSandoval lucas = new luchador_LucasSandoval();
-			lucas.mostrarLuchador();
-	}*/
+    	this.spd = spd()*rango;  
+    	this.objeto = objeto; //un luchador se crea sin tener un objeto    	
+    }
+	
+	//Metodo para equipar objeto
+	public void equiparObjeto(Luchador luchador, ObjetoEquipable objeto){
+		//Se debe conocer el luchador al que se le aplica un aumento
+		//y el objeto, por eso este metodo requiere estos 2 parametros
+		setObjeto(objeto);
+		actualizarEstadisticas(luchador,objeto);		
+	}
+	//Metodo para actualizar los stats del luchador segun el objeto
+	private static void actualizarEstadisticas(Luchador luchador, ObjetoEquipable objeto){
+		int aumento = objeto.getMejoraFinal();
+		String estadistica = objeto.getEstadistica();
+		//no es necesario hacer else 
+		if(estadistica.equals("HP")){actualizarHp(luchador,aumento);}
+		if(estadistica.equals("ATK")){actualizarAtk(luchador,aumento);}
+		if(estadistica.equals("DEF")){actualizarDef(luchador,aumento);}
+		if(estadistica.equals("SPD")){actualizarSpd(luchador,aumento);}		
+	}	
+	
+	private static void actualizarHp(Luchador luchador,int aumento){
+		int hp = luchador.getHp();
+		/*se obtiene el hp del luchador	tener en cuenta que ese hp ya
+		  esta multiplicado por rango, asi que solo se le suma el aumento*/
+		
+		luchador.setHp((hp+aumento));//se actualiza agregandole aumento
+	}	
+	//Lo mismo que el actualizarHp pero en las otras estadisticas
+	private static void actualizarAtk(Luchador luchador,int aumento){
+		int atk = luchador.getAtk();
+		luchador.setAtk((atk+aumento));
+	}
+	private static void actualizarDef(Luchador luchador,int aumento){
+		int def = luchador.getDef();
+		luchador.setAtk((def+aumento));
+	}
+	private static void actualizarSpd(Luchador luchador,int aumento){
+		int spd = luchador.getSpd();
+		luchador.setAtk((spd+aumento));
+	}
 	//Método para mostrar datos
 	public void mostrarLuchador(){
 				System.out.println("Nombre: "+nombre);
@@ -33,8 +69,7 @@ public class luchador_LucasSandoval {
 				System.out.println("Hp: "+hp);
 				System.out.println("ATK: "+atk);
 				System.out.println("DEF "+def);
-				System.out.println("SPD: "+ spd);
-				
+				System.out.println("SPD: "+ spd);				
 	}
 	
 //Metodos para crear los datos de un luchador (Nombre, faccion, rango, estadisticas)
@@ -67,7 +102,7 @@ public class luchador_LucasSandoval {
 	    String [] faccion = new String[3];
 	    faccion[0]="Agua";
 	    faccion[1]="Fuego";
-	    faccion[2]="Tierra";
+	    faccion[2]="Planta";
 	    return faccion;
 	    }	    
 	    private static String elegirFaccion(String[]faccion){
@@ -143,5 +178,11 @@ public class luchador_LucasSandoval {
 	   }
 	   public void setSpd(int spd) {
 	   	this.spd=spd;
-	   }	 
+	   }	
+	   public ObjetoEquipable getObjeto() {
+		   	return this.objeto;
+		   }
+	   public void setObjeto(ObjetoEquipable objeto) {
+		   	this.objeto=objeto;
+		   }
 }

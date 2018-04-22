@@ -105,7 +105,7 @@ public class ObjetoEquipable {
    public void setEstrellas(int estrellas) {
    	this.estrellas=estrellas;
    }
-   public void setDef(int mejoraFinal){
-     this.mejoraFinal=mejoraFinal;
+   public void setMejoraFinal(int mejoraBase, int estrellas){
+     this.mejoraFinal= mejoraBase*estrellas;
    }   
 }

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class inventarioObjetos {
+public class InventarioObjetos {
 	
 	static ArrayList<ObjetoEquipable> inventarioObj = new ArrayList<ObjetoEquipable>();
 		
