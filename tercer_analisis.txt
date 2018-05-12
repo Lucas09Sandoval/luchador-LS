@@ -1,8 +1,4 @@
-Análisis:
-1) Las clases "Monstruo" y "Luchador" heredan atributos y métodos 
+AnÃ¡lisis:
+Las clases "Monstruo" y "Luchador" heredan atributos y mÃ©todos 
 una clase llamada "Personaje", pues tanto monstruo como luchador tienen
-atributos y métodos en común, como por ejemplo las estadísticas.
-
-2) Las Clases "InventarioObjetos" y "InventarioLuchadores" heredan de 
-una clase llamada "Inventario", ya que ambas clases tienen métodos para gestionar
-y agregar elementos/objetos de un respectivo tipo (Objetos que son "Luchador" y "ObjetoEquipable").
+atributos y mÃ©todos en comÃºn, como por ejemplo las estadÃ­sticas.
