@@ -14,13 +14,13 @@ public class Batalla {
 	public static void agregarLuchador(){
 		Luchador luchador;
 		for(int x=0;x<6;x++){//el for es para agregar 6 luchadores de forma facil
-			luchador = new Luchador(); //se crean luchadores
+			luchador = new Luchador(""," ",0,0,0,0); //se crean luchadores
 			equipo.add(luchador); // se agregan al equipo
 		}
 	}
 	//este es privado y estatico, porque el jugador pelea contra un monstruo al azar
 	private static void agregarMonstruo(){
-		Monstruo monstruo = new Monstruo();
+		Monstruo monstruo = new Monstruo(" "," ",0,0,0,0);
 		enemigo.add(monstruo);
 	}
 	

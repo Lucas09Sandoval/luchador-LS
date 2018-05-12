@@ -1,17 +1,13 @@
 import java.lang.Math;
 
-public class Luchador {	
-	private String nombre;
-	private int rango;
-	private String faccion;
-	private int hp;
-	private int atk;
-	private int def;
-	private int spd;	
+public class Luchador extends Personaje{
+	
+	private int rango;	
 	private ObjetoEquipable objeto;
 	
 	//Constructor de la clase
-	public Luchador(){
+	public Luchador(String nombre, String faccion, int hp, int atk, int def, int spd){
+		super(nombre, faccion, hp, atk, def, spd);
     	//los datos base de cada luchador creado
     	this.nombre= elegirNombre(nombres());
     	this.rango= rango();
@@ -62,7 +58,7 @@ public class Luchador {
 		luchador.setAtk((spd+aumento));
 	}
 	//Método para mostrar datos
-	public void mostrarLuchador(){
+	public void mostrarLuchador(){		
 				System.out.println("Nombre: "+nombre);
 				System.out.println("Facción: "+ faccion);
 				System.out.println("Rango: "+ rango);

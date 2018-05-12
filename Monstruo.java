@@ -1,18 +1,13 @@
 import java.lang.Math;
 
-public class Monstruo {
-	//los datos base de cada Monstruo creado
-	private int hp;
-	private int atk;
-	private int def;
-	private int spd;
-	private String nom;
-	private String faccion;
+public class Monstruo extends Personaje{
+	//los datos base de cada Monstruo creado	
 	private ObjetoEquipable drop;
 	
 	//Constructor de la clase monstruo
-	public Monstruo(){
-		this.nom = elegirNombre(nombresDeMonstruo());
+	public Monstruo(String nombre, String faccion, int hp, int atk, int def, int spd){
+		super(nombre, faccion, hp, atk, def, spd);
+		this.nombre = elegirNombre(nombresDeMonstruo());
 		this.faccion= elegirFaccion(faccionMonstruo());
 		this.hp = hp();
 		this.atk= atk();
@@ -48,7 +43,7 @@ public class Monstruo {
 	//método que muestra el monstruo creado
 	public void mostrarMonstruo(){
 		System.out.println("Se ha creado un monstruo");
-		System.out.println("Nombre: "+nom);
+		System.out.println("Nombre: "+nombre);
 		System.out.println("Faccion: "+ faccion);
 		System.out.println("HP: "+"\t"+hp);
 		System.out.println("ATK: "+"\t"+atk);
@@ -117,11 +112,11 @@ public class Monstruo {
 	   public int getSpd() {
 	   	return this.spd;
 	   }
-	   public String getNom() {
-		   	return this.nom;
-		   }	  
-		   public void setNom(String nom) {
-		   	this.nom=nom;
+	   public String getNommbre() {
+		   	return this.nombre;
+		   }		   
+	   public void setNombre(String nombre) {
+		   	this.nombre=nombre;
 		   }
 	   public void setAtk(int atk) {
 	   	this.atk=atk;

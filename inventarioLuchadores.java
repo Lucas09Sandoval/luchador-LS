@@ -7,7 +7,7 @@ public class InventarioLuchadores {
 	 //Metodo que mustre todos los luchadores del inventario
 	public void mostrarInv(){
 		for(int i=0; i<inventarioLuch.size();i++){	    		
-		System.out.print("Luchador N°"+" "+i+"\t"+"Nombre "+inventarioLuch.get(i).getNom());
+		System.out.print("Luchador N°"+" "+i+"\t"+"Nombre "+inventarioLuch.get(i).getNombre());
 		System.out.print("\t"+"Rango "+"\t"+inventarioLuch.get(i).getRango());
 		System.out.print("\t"+"Facción "+"\t"+inventarioLuch.get(i).getFaccion());
 		System.out.println(""); 	
@@ -44,8 +44,9 @@ public class InventarioLuchadores {
 			System.out.println("No se pueden agregar más luchadores");			
 		}else{
 			System.out.println("Se ha agregado un luchador");
-		Luchador luchador = new Luchador();
-		inventarioLuch.add(luchador);}
+		Luchador luchador = new Luchador("","",0,0,0,0);
+		inventarioLuch.add(luchador);
+		}
 		}  
 	//Metodo que elimina un luchador
 	   public void eliminarUnluchador(){
