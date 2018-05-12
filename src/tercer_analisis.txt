@@ -1,7 +1,0 @@
-Análisis:
-1) Las clases "Monstruo" y "Luchador" heredan atributos y métodos 
-una clase llamada "Personaje", pues tanto monstruo como luchador tienen
-atributos y métodos en común, como por ejemplo las estadísticas.
-
-2) Los inventarios pueden ser también de herencia, pero no tienen atributos, por
-lo cual conviene hacerlos como interfaz (lo cual el profesor enseñara después).
