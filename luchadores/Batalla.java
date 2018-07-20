@@ -5,10 +5,28 @@ import java.lang.Math;
 
 public class Batalla {
 
-    public static Monstruo enemigo = new Monstruo(" ", " ", 0, 0, 0, 0);
-    public static ArrayList<Luchador> equipo = new ArrayList<Luchador>();
+    private Monstruo enemigo;
+    private ArrayList<Luchador> equipo;
+    private String muertos;
     //el arrrayList turno es para poder ordenar el orden en que se moveran los luchadores
+    
+    public Batalla(){
+        enemigo = new Monstruo(" ", " ", 0, 0, 0, 0);
+        equipo = new ArrayList<Luchador>();
+        muertos ="";
+    }
 
+    //Para la GUI
+    public Luchador luchadoresVentana(){
+        Luchador luchador = new Luchador("","",0,0,0,0);
+        int objeto = (int) (Math.random() * 2 + 1);
+        if(objeto==1){
+            ObjetoEquipable item = new ObjetoEquipable();
+            luchador.equiparObjeto(item);
+        }
+        return luchador;
+    }
+    
     public void agregarLuchadores() {
         Luchador luchador;
         for (int x = 0; x < 6; x++) {
@@ -19,8 +37,9 @@ public class Batalla {
     }
 
     //Método para hacer vector con el que trabajara el ordenamiento de la burbuja
-    private void vectorLuchadores() {
-        Luchador[] luchs = new Luchador[6];
+    public void vectorLuchadores() {
+        int total = equipo.size();
+        Luchador[] luchs = new Luchador[total];
         for (int i = 0; i < luchs.length; i++) {
             luchs[i] = equipo.get(i);
         }
@@ -56,6 +75,8 @@ public class Batalla {
                     equipo.add(luchs[x]);
         }
     }
+    
+    /*
 
     public void iniciarPartida() {
         int a = lanzarDados();
@@ -72,8 +93,9 @@ public class Batalla {
         pelear();
         System.out.println(finalizarPartida());
     }
+*/
 
-    private void pelear() {
+    public void pelear() {
 
         do {
             if (enemigo.getSpd() > equipo.get(0).getSpd()) {
@@ -95,7 +117,7 @@ public class Batalla {
     }
 
     //Métodos pedidos para el avance anterior de ayudantía
-    private int lanzarDados() {
+    public int lanzarDados() {
         int dado1 = lanzarDado1();//el de 8 caras		
         int dado2 = lanzarDado2();//el de 6 caras
 
@@ -115,7 +137,7 @@ public class Batalla {
     }
 
     //Métodos para evaluar resultados del lanzarDados()
-    private void evaluarCaso(int resultado) {
+    public void evaluarCaso(int resultado) {
 
         if (resultado > 0) {
 
@@ -185,8 +207,8 @@ public class Batalla {
         }
 
         if (equipo.get(0).getHp() == 0) {
+            muertos(equipo.get(0));
             equipo.remove(0);
-            System.out.println("Un luchador a muerto!");
         }
     }
 
@@ -221,7 +243,7 @@ public class Batalla {
         return bonus;
     }
 
-    private String finalizarPartida() {
+    public String finalizarPartida() {
         String ganador = "";
 
         if (equipo.size() == 0) {
@@ -232,4 +254,34 @@ public class Batalla {
 
         return "Usted ha: " + ganador;
     }
+    
+    private void muertos(Luchador miembroEquipo){
+        String saltoLinea = System.getProperty("line.separator");
+        this.muertos+=saltoLinea+miembroEquipo.getNombre();
+    }
+    
+    //Métodos get y set
+    public Monstruo getEnemigo() {
+        return enemigo;
+    }
+
+    public ArrayList<Luchador> getEquipo() {
+        return equipo;
+    }    
+
+    public void setEnemigo(Monstruo enemigo) {
+        this.enemigo = enemigo;
+    }
+
+    public void setEquipo(ArrayList<Luchador> equipo) {
+        this.equipo = equipo;
+    }
+
+    public void setMuertos(String muertos) {
+        this.muertos = muertos;
+    }
+
+    public String getMuertos() {
+        return muertos;
+    }    
 }

@@ -27,10 +27,11 @@ public class ObjetoEquipable {
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre + "\t"
-                + "Mejora Base: " + mejoraBase + "\t"
-                + "Estrellas: " + estrellas + "\t"
-                + "Mejora Final: " + mejoraFinal + "\t"
+        String saltoLinea = System.getProperty("line.separator");
+        return "Nombre: " + nombre + saltoLinea
+                + "Mejora Base: " + mejoraBase + saltoLinea
+                + "Estrellas: " + estrellas + saltoLinea
+                + "Mejora Final: " + mejoraFinal + saltoLinea
                 + "Estadistica: " + estadistica;
     }
 

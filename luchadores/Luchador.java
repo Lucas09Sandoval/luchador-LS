@@ -27,12 +27,26 @@ public class Luchador extends Personaje {
         this.objeto = new ObjetoEquipable[1];
     }
 
+    //Override de toString() de la clase Personaje
+    @Override
+    public String toString() {
+        String saltoLinea = System.getProperty("line.separator");
+        return "Nombre: " + nombre + saltoLinea
+                + "Facción: " + faccion + saltoLinea
+                + "Rango: " + rango + saltoLinea
+                + "HP: " + hp + saltoLinea
+                + "Ataque: " + atk + saltoLinea
+                + "Defensa: " + def + saltoLinea
+                + "Velocidad: " + spd + saltoLinea
+                + "Objeto Equipado: " + saltoLinea + objetoEquipado();
+    }
+
     private String objetoEquipado() {
         String contenido = "";
         if (objeto[0] == null) {
             contenido = "El luchador no tiene Objeto equipado";
         } else {
-            contenido = objeto[0].getNombre();
+            contenido = objeto[0].toString();
         }
         return contenido;
     }
@@ -232,19 +246,4 @@ public class Luchador extends Personaje {
     public void setObjeto(int x, ObjetoEquipable objeto) {
         this.objeto[x] = objeto;
     }
-
-    //Override de toString() de la clase Personaje
-    @Override
-    public String toString() {
-
-        return "Nombre: " + nombre + "\t"
-                + "Facción: " + faccion + "\t"
-                + "Rango: " + rango + "\t"
-                + "HP: " + hp + "\t"
-                + "Ataque: " + atk + "\t"
-                + "Defensa: " + def + "\t"
-                + "Velocidad: " + spd + "\t"
-                + "Objeto Equipado: " + "\t" + objetoEquipado();
-    }
-
 }

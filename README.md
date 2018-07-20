@@ -1,1 +1,1 @@
-Avance 6 de ayudantía (Limpieza de codigo innecesario (System.outs))
+Ayudantía, tarea "Final" y correcciones a avances anteriores (System.out innecesarios)
